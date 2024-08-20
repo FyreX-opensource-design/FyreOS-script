@@ -22,15 +22,14 @@ cd linux-tkg
 makepkg -si
 cd ~
 sudo rm -rf ~/yay
-sudo rm -rf ~/linux-tkg
 # echo some useful things
 echo """
-check https://nowsci.com/winapps/ for running most windows apps in linux, potentially better than WINE/PROTON. Note that you might need to use a Win11 pro ISO rather than Win10. You very likely don't need to buy a key.
+check https://nowsci.com/winapps/ for running most windows apps in linux, potentially better than WINE/PROTON. Note that you might need to use a Win11 pro ISO rather than Win10 pro. You very likely don't need to buy a key.
 """ >> ~/tips.txt
 #user custom stuff
-read "which browser do you ant to use most often: 1 = chrome, 2 = microsoft edge, 3 = firefox" browser_result
+read "which browser do you want to use most often: 1 = chrome, 2 = microsoft edge, 3 = firefox" browser_result
 if [$browser_result == "1"]; then
-yay -Sy google-chrome-wayland-vulkan
+yay -Sy google-chrome
 else if [$browser_result == "2"]; then
 yay -Sy microsoft-edge-stable-bin
 else if [$browser_result == "3"]; then
@@ -41,6 +40,15 @@ if [$waydroid_result == "Y"]; then
 yay -Sy binder_linux-dkms
 sudo modprobe binder-linux device=binder,hwbinder,vndbinder
 yay -Sy waydroid
+fi
+read "install bottles? This will allow you to run most windows apps as if they were designed for linux? do note, it sandboxes them from your system somewhat [Y/N]" bottles_result
+if [$bottles_result == "Y"]; then
+  flatpak install flathub com.usebottles.bottles
+fi
+read "install steam? [Y/N]" steam_result
+if [$steam_result == "y"]; then
+  sudo pacman -Sy steam
+  
 fi
 read "install packages for 3d printing/general CAD [Y/N]" cad_result
 if [$cad_result == "Y"]; then
